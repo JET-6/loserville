@@ -111,6 +111,43 @@
         button { font-size: 1rem; padding: 10px 20px; }
         .sign { font-size: 1.4rem; }
     }
+
+    /* Neon Scream */
+    @keyframes neonScream {
+    0% {
+        box-shadow:
+            0 0 5px #ff00ff,
+            0 0 15px #ff00ff,
+            0 0 30px #ff00ff,
+            0 0 60px #ff00ff;
+        background: #ff00ff55;
+    }
+    50% {
+        box-shadow:
+            0 0 5px #00ffff,
+            0 0 15px #00ffff,
+            0 0 30px #00ffff,
+            0 0 60px #00ffff;
+        background: #00ffff55;
+    }
+    100% {
+        box-shadow:
+            0 0 5px #ff0099,
+            0 0 15px #ff0099,
+            0 0 30px #ff0099,
+            0 0 60px #ff0099;
+        background: #ff009955;
+    }
+}
+
+@keyframes jitter {
+    0% { transform: translate(0px, 0px) rotate(0deg); }
+    25% { transform: translate(1px, -1px) rotate(-1deg); }
+    50% { transform: translate(-1px, 1px) rotate(1deg); }
+    75% { transform: translate(2px, -2px) rotate(0deg); }
+    100% { transform: translate(-2px, 2px) rotate(1deg); }
+}
+
 </style>
 </head>
 
@@ -174,6 +211,23 @@ noBtn.addEventListener("mouseover", () => {
 /* ------------------------------
    EVASIVE "NO" BUTTON (improved)
 ------------------------------ */
+/*const noBtn = document.getElementById("noBtn");
+
+function moveButton() {
+    const x = Math.random() * (window.innerWidth - 80);
+    const y = Math.random() * (window.innerHeight - 80);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+}
+
+noBtn.addEventListener("mouseenter", moveButton);
+noBtn.addEventListener("mouseover", moveButton);*/
+
+/* ------------------------------
+   SCREAMING NEON "NO" BUTTON
+------------------------------ */
 const noBtn = document.getElementById("noBtn");
 
 // Add screaming neon styles
@@ -182,16 +236,16 @@ noBtn.style.transition = "left 0.1s linear, top 0.1s linear";
 noBtn.style.animation = "neonScream 0.2s infinite alternate, jitter 0.1s infinite";
 
 function moveButton() {
-    const x = Math.random() * (window.innerWidth - 80);
-    const y = Math.random() * (window.innerHeight - 80);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
 
-    //noBtn.style.position = "fixed";
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
 }
 
 noBtn.addEventListener("mouseenter", moveButton);
 noBtn.addEventListener("mouseover", moveButton);
+
 </script>
 
 </body>
