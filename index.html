@@ -161,16 +161,20 @@ window.addEventListener("hashchange", showPage);
 /* ------------------------------
    EVASIVE "NO" BUTTON
 ------------------------------ */
-const noBtn = document.getElementById("noBtn");
+let running = false;
 
 noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 100);
-
-    noBtn.style.position = "fixed";
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
+    if (!running) {
+        running = true;
+        setInterval(() => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }, 300);
+    }
 });
+
 </script>
 
 </body>
