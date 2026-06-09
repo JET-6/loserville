@@ -531,6 +531,10 @@
     100% { box-shadow: 0 0 30px #ffcc00; }
 }
 
+body.noGlobalBG::before {
+    display: none;
+}
+
 
 </style>
 </head>
@@ -598,7 +602,7 @@
 /* ------------------------------
    SIMPLE PAGE ROUTER
 ------------------------------ */
-function goTo(page) {
+/* function goTo(page) {
     window.location.hash = page;
     showPage();
 }
@@ -607,7 +611,24 @@ function showPage() {
     const hash = window.location.hash.replace("#", "") || "page1";
     document.querySelectorAll(".page").forEach(p => p.style.display = "none");
     document.getElementById(hash).style.display = "block";
-}
+} */
+
+    /* UPDATED PAGE ROUTER */
+    function goToPage(page) {
+        // hide all pages
+        document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+
+        // show selected page
+        document.getElementById("page" + page).style.display = "block";
+
+        // toggle body class for background control
+        if (page === 1) {
+            document.body.classList.remove("noGlobalBG");
+        } else {
+            document.body.classList.add("noGlobalBG");
+        }
+    }
+
 
 window.addEventListener("load", showPage);
 window.addEventListener("hashchange", showPage);
