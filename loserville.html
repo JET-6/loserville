@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loserville</title>
+
+<style>
+    /* ------------------------------
+       GLOBAL STYLES + ANIMATED BG
+    ------------------------------ */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: black;
+    }
+
+    /* Animated gradient background */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(45deg, #ff00cc, #3333ff, #00eaff, #ff0099);
+        background-size: 400% 400%;
+        animation: gradientMove 12s ease infinite;
+        z-index: -2;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Neon text */
+    .neon {
+        font-size: 2.8rem;
+        color: #ff4df0;
+        text-shadow:
+            0 0 5px #ff4df0,
+            0 0 10px #ff4df0,
+            0 0 20px #ff4df0,
+            0 0 40px #ff00ff;
+        animation: flicker 2s infinite;
+    }
+
+    @keyframes flicker {
+        0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+            opacity: 1;
+        }
+        20%, 24%, 55% {
+            opacity: 0.4;
+        }
+    }
+
+    /* Buttons */
+    button {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #ffffff22;
+        color: white;
+        backdrop-filter: blur(4px);
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #ffffff55;
+    }
+
+    /* Page container */
+    .page {
+        display: none;
+        width: 90%;
+        max-width: 600px;
+    }
+
+    /* Highway sign */
+    .sign {
+        background: #0a3d62;
+        padding: 40px 20px;
+        border-radius: 12px;
+        border: 4px solid #1dd1a1;
+        color: #1dd1a1;
+        font-size: 1.8rem;
+        text-shadow: 0 0 10px #1dd1a1;
+        box-shadow: 0 0 20px #1dd1a1;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 10px #1dd1a1; }
+        to { box-shadow: 0 0 25px #1dd1a1; }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+        .neon { font-size: 2rem; }
+        button { font-size: 1rem; padding: 10px 20px; }
+        .sign { font-size: 1.4rem; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+    <h1 class="neon">welcome to loserville</h1>
+    <p style="font-size:1.4rem; margin-top:20px;">do you miss me?</p>
+
+    <button onclick="goTo('page2')">yes</button>
+    <button id="noBtn">no</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <h1 class="neon">haha, i knew it, loser!</h1>
+    <button onclick="goTo('page3')">well, then...</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+    <div class="sign">
+        welcome to loserville<br>
+        population: you
+    </div>
+</div>
+
+<script>
+/* ------------------------------
+   SIMPLE PAGE ROUTER
+------------------------------ */
+function goTo(page) {
+    window.location.hash = page;
+    showPage();
+}
+
+function showPage() {
+    const hash = window.location.hash.replace("#", "") || "page1";
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(hash).style.display = "block";
+}
+
+window.addEventListener("load", showPage);
+window.addEventListener("hashchange", showPage);
+
+/* ------------------------------
+   EVASIVE "NO" BUTTON
+------------------------------ */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+});
+</script>
+
+</body>
+</html>
