@@ -614,22 +614,43 @@ function showPage() {
 } */
 
     /* UPDATED PAGE ROUTER */
-    function goTo(page) {
-        // hide all pages
-        document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+function goTo(page) {
+    // Normalize page into an ID like "page1", "page2", "page3"
+    let targetId;
 
-        // show selected page
-        document.getElementById("page" + page).style.display = "block";
-
-        // toggle body class for background control
-        if (page === 1) {
-            document.body.classList.remove("noGlobalBG");
+    if (typeof page === "number") {
+        targetId = "page" + page;
+    } else if (typeof page === "string") {
+        if (page.startsWith("page")) {
+            targetId = page;          // "page2"
         } else {
-            document.body.classList.add("noGlobalBG");
+            targetId = "page" + page; // "2" -> "page2"
         }
+    } else {
+        targetId = "page1";
     }
 
+    // hide all pages
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
 
+    // show selected page
+    const target = document.getElementById(targetId);
+    if (target) {
+        target.style.display = "block";
+    }
+
+    // toggle body class for background control
+    if (targetId === "page1") {
+        document.body.classList.remove("noGlobalBG");
+    } else {
+        document.body.classList.add("noGlobalBG");
+    }
+}
+
+
+window.addEventListener("load", () => {
+    goTo(1);
+});
 window.addEventListener("load", showPage);
 window.addEventListener("hashchange", showPage);
 
