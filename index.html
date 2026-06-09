@@ -214,8 +214,8 @@
         did you miss me?
     </p>
 
-    <button onclick="goTo('page2')">yes</button>
-    <button id="noBtn">no</button>
+    <button id="yesBtn" style="display:none;" onclick="goTo('page2')">yes</button>
+    <button id="noBtn" style="display:none;">no</button>
 </div>
 
 <!-- PAGE 2 -->
@@ -292,6 +292,11 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         loadingBar.style.animation = "loadingGlow 1.5s infinite"; // stop the fill animation
         question.style.display = "block";
+
+        // Reveal buttons AFTER loading finishes
+        document.getElementById("yesBtn").style.display = "inline-block";
+        document.getElementById("noBtn").style.display = "inline-block";
+        
     }, 2200); // matches loadingFill duration
 });
 
