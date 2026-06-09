@@ -692,16 +692,21 @@ function startEmotionalLoading() {
 
     // reveal after loading
     setTimeout(() => {
-        loadingBar.style.animation = "loadingGlow 1.5s infinite";
-        question.style.display = "block";
-        yesBtn.style.display = "inline-block";
-        noBtn.style.display = "inline-block";
+    loadingBar.style.animation = "loadingGlow 1.5s infinite";
+    question.style.display = "block";
+    yesBtn.style.display = "inline-block";
+    noBtn.style.display = "inline-block";
 
-        // ⭐ RE-ATTACH EVASIVE LOGIC HERE ⭐
+    // ⭐ RE-ATTACH EVASIVE LOGIC SAFELY ⭐
+    if (typeof moveButton === "function") {
         noBtn.addEventListener("mouseenter", moveButton);
         noBtn.addEventListener("mouseover", moveButton);
+    } else {
+        console.error("moveButton() is missing!");
+    }
 
-    }, 2200);
+}, 2200);
+
 }
 
 
