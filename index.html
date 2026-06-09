@@ -261,6 +261,26 @@
     100% { opacity: 1; text-shadow: 0 0 25px #ff00ff; }
 }
 
+<div class="synthwave-bg">
+
+    <div class="laughContainer">
+        <div class="smiley synthwaveSmiley">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="mouth"></div>
+        </div>
+
+        <div class="marquee">
+            <span>HAHAHAHAHAHA</span>
+        </div>
+    </div>
+
+    <button onclick="goToPage(3)" id="continueBtn" class="synthwaveBtn">
+        continue
+    </button>
+
+</div>
+
 
 </style>
 </head>
@@ -285,17 +305,25 @@
 
 <!-- PAGE 2 -->
 <div id="page2" class="page" style="display:none;">
-    <div class="laughContainer">
-        <div class="smiley">
-            <div class="eye left"></div>
-            <div class="eye right"></div>
-            <div class="mouth"></div>
+    <div class="synthwave-bg">
+
+        <div class="laughContainer">
+            <div class="smiley synthwaveSmiley">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="mouth"></div>
+            </div>
+
+            <div class="marquee">
+                <span>HAHAHAHAHAHA</span>
+            </div>
         </div>
 
-        <h2 class="laughText">HAHAHAHAHAHA</h2>
-    </div>
+    <button onclick="goTo('page3')" id="continueBtn" class="synthwaveBtn">
+        obviously
+    </button>
 
-    <button onclick="goTo('page3')">obviously</button>
+</div>
 
 </div>
 <!-- PAGE 3 -->
