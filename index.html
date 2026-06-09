@@ -674,7 +674,7 @@ noBtn.addEventListener("mouseenter", moveButton);
 noBtn.addEventListener("mouseover", moveButton);*/
 
 /* ------------------------------
-   EMOTIONAL LOADING BAR LOGIC
+   EMOTIONAL LOADING BAR LOGIC 1.5
 ------------------------------ */
 function startEmotionalLoading() {
     const question = document.getElementById("questionText");
@@ -686,6 +686,8 @@ function startEmotionalLoading() {
     question.style.display = "none";
     yesBtn.style.display = "none";
     noBtn.style.display = "none";
+
+    // start loading bar animation
     loadingBar.style.animation = "loadingGlow 1.5s infinite, loadingFill 2.2s forwards";
 
     // reveal after loading
@@ -694,8 +696,14 @@ function startEmotionalLoading() {
         question.style.display = "block";
         yesBtn.style.display = "inline-block";
         noBtn.style.display = "inline-block";
+
+        // ⭐ RE-ATTACH EVASIVE LOGIC HERE ⭐
+        noBtn.addEventListener("mouseenter", moveButton);
+        noBtn.addEventListener("mouseover", moveButton);
+
     }, 2200);
 }
+
 
 
 /* ------------------------------
