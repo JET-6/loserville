@@ -615,37 +615,26 @@ function showPage() {
 
     /* UPDATED PAGE ROUTER */
 function goTo(page) {
-    // Normalize page into an ID like "page1", "page2", "page3"
-    let targetId;
-
-    if (typeof page === "number") {
-        targetId = "page" + page;
-    } else if (typeof page === "string") {
-        if (page.startsWith("page")) {
-            targetId = page;          // "page2"
-        } else {
-            targetId = "page" + page; // "2" -> "page2"
-        }
-    } else {
-        targetId = "page1";
-    }
+    // normalize page ID
+    let targetId = typeof page === "number" ? "page" + page :
+                   page.startsWith("page") ? page : "page" + page;
 
     // hide all pages
     document.querySelectorAll(".page").forEach(p => p.style.display = "none");
 
     // show selected page
     const target = document.getElementById(targetId);
-    if (target) {
-        target.style.display = "block";
-    }
+    if (target) target.style.display = "block";
 
-    // toggle body class for background control
+    // toggle global background
     if (targetId === "page1") {
         document.body.classList.remove("noGlobalBG");
+        startEmotionalLoading();   // ← RUN THE LOADING BAR HERE
     } else {
         document.body.classList.add("noGlobalBG");
     }
 }
+
 
 
 window.addEventListener("load", () => {
@@ -687,21 +676,27 @@ noBtn.addEventListener("mouseover", moveButton);*/
 /* ------------------------------
    EMOTIONAL LOADING BAR LOGIC
 ------------------------------ */
-window.addEventListener("load", () => {
+function startEmotionalLoading() {
     const question = document.getElementById("questionText");
     const loadingBar = document.getElementById("loadingBar");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
 
-    // Reveal the question after the bar finishes filling
+    // reset everything
+    question.style.display = "none";
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+    loadingBar.style.animation = "loadingGlow 1.5s infinite, loadingFill 2.2s forwards";
+
+    // reveal after loading
     setTimeout(() => {
-        loadingBar.style.animation = "loadingGlow 1.5s infinite"; // stop the fill animation
+        loadingBar.style.animation = "loadingGlow 1.5s infinite";
         question.style.display = "block";
+        yesBtn.style.display = "inline-block";
+        noBtn.style.display = "inline-block";
+    }, 2200);
+}
 
-        // Reveal buttons AFTER loading finishes
-        document.getElementById("yesBtn").style.display = "inline-block";
-        document.getElementById("noBtn").style.display = "inline-block";
-
-    }, 2200); // matches loadingFill duration
-});
 
 /* ------------------------------
    SCREAMING NEON "NO" BUTTON
